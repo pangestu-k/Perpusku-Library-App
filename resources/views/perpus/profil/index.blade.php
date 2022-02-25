@@ -4,7 +4,7 @@
     <div class="grid-padding text-center">
 
         @if (session()->get('bayar'))
-            <div class="alert p-2">
+            <div class="alert p-2 bg-dark rounded text-white">
                 {{ session()->get('bayar') }} !
             </div>
         @endif
@@ -150,8 +150,5 @@
                 </div>
             @endif
         @endif
-
-
-
     </div>
 @endsection

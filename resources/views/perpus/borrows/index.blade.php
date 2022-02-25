@@ -177,7 +177,7 @@
                     <div class="form-group">
                         <label for="">Tanggal kembali</label>
                         <input type="hidden" class="form-control mb-4" placeholder="tanggal_kembali" name="tanggal_kembali" value="{{ old('tanggal_kembali', date('Y-m-d', strtotime(Carbon\Carbon::today()->addDays(5)->toDateString())) ) }}">
-                        <div class="alert alert-success rounded">{{ date('d M Y', strtotime(Carbon\Carbon::today()->addDays(5)->toDateString())) }}</div>
+                        <div class="alert alert-success rounded">{{ date('d M Y', strtotime(Carbon\Carbon::today()->addDays(7)->toDateString())) }}</div>
                         @error('tanggal_kembali')
                             <div class="text-danger text-sm">
                                 {{ $message }}

@@ -29,7 +29,7 @@
               <div class="row align-items-center justify-content-center">
               <div class="col-md-7">
                   <h3 style="font-family: 'Staatliches', cursive;">P e r p u s k    u</h3>
-                  <p class="mb-4">SMK WIKRAMA 1 GARUT</p>
+                  <p class="mb-4">Aplikasi Perpustakaan Digital</p>
                   <form method="POST" action="">
                       @csrf
                   <div class="form-group first" {{ route('auth.login') }}>

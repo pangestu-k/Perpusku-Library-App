@@ -30,14 +30,22 @@ class BorrowController extends Controller
     public function store()
     {
         if(auth()->user()->role !== 'member'){
-            if(in_array(request('user_id'),Borrow::pluck('user_id')->toArray()) && in_array(request('book_id'),Borrow::pluck('book_id')->toArray())){
+            if(in_array(request('user_id'),Borrow::pluck('user_id')->toArray()) && in_array(request('book_id'),Borrow::pluck('book_id')->toArray()) && !in_array(Borrow::where('user_id',request('user_id'))->where('book_id', request('book_id'))->latest()->first()->status,['kembali','booking'])){
                 session()->flash('illegal','dia sudah meminjam buku ini');
                 return back();
             }
         }else{
+            // dd(!in_array('pinjam',['kembali','booking']));
+            // dd(!in_array(Borrow::where('user_id',request('user_id'))->where('book_id', request('book_id'))->latest()->first()->status,['kembali','booking']));
             if(in_array(auth()->id(),Borrow::pluck('user_id')->toArray()) && in_array(request('book_id'),Borrow::pluck('book_id')->toArray())){
-                session()->flash('illegal','anda sudah meminjam buku ini');
-                return back();
+                $statusChecked = Borrow::where('user_id',request('user_id'))->where('book_id', request('book_id'))->pluck('status')->toArray();
+                if(in_array('pinjam',$statusChecked)){
+                    session()->flash('illegal','anda sudah meminjam buku ini');
+                    return back();
+                }elseif(in_array('booking',$statusChecked)){
+                    session()->flash('illegal','buku sedang anda booking');
+                    return back();
+                }
             }
         }
 
@@ -61,9 +69,6 @@ class BorrowController extends Controller
 
         $borrow = Borrow::create($data);
 
-        $borrow->book->where('id', $data['book_id'])
-        ->update([ 'stok' => ($borrow->book->stok - 1)]);
-
         session()->flash('success', 'Buku berhasi dipinjam');
         return redirect()->route('perpusku.borrow.index');
     }
@@ -77,7 +82,6 @@ class BorrowController extends Controller
         ]);
 
         $kembaliBuku->book->where('id', $kembaliBuku->book_id)->update(['stok' => $kembaliBuku->book->stok + 1]);
-        $kembaliBuku->delete();
         return back();
     }
 
@@ -95,17 +99,38 @@ class BorrowController extends Controller
     public function konfirmasi($id)
     {
         $konfiBuku =  Borrow::find($id);
+
+        if(Book::find($konfiBuku->book_id)->stok <= 0){
+            $konfiBuku->update([
+                'keterangan' => 'Buku terakhir sudah dipinjam user lain, silakan pinjam buku lain',
+            ]);
+            session()->flash('illegal','Buku terakhir sudah dipinjam user lain, silakan pinjam buku lain');
+            return back();
+        }
+
         $konfiBuku->update([
             'status' => 'pinjam',
             'keterangan' => 'Buku masih dipinjam',
         ]);
+
+        $konfiBuku->book->where('id', $konfiBuku->book_id)
+        ->update([ 'stok' => ($konfiBuku->book->stok - 1)]);
 
         return back();
     }
 
     public function destroy($id)
     {
-        $borrowHapus = Borrow::find($id)->delete();
+        $borrowHapus = Borrow::find($id);
+        if($borrowHapus->status == 'kembali' || $borrowHapus->status == 'booking' ){
+            $borrowHapus->delete();
+        }else{
+            $bookStok = Book::find($borrowHapus->book_id);
+            $bookStok->stok = $bookStok->stok + 1;
+            $bookStok->save();
+            $borrowHapus->delete();
+        }
+
         session()->flash('success', 'Berhasil dihapus');
         return back();
     }

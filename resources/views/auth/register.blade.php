@@ -29,7 +29,7 @@
               <div class="row align-items-center justify-content-center">
               <div class="col-md-7 mt-2">
                   <h3 style="font-family: 'Staatliches', cursive;">P e r p u s k u</h3>
-                  <p class="mb-4">SMK WIKRAMA 1 GARUT</p>
+                  <p class="mb-4">Aplikasi Perpustakaan Digital</p>
                   <form method="POST" action="{{ route('auth.register') }}">
                       @csrf
 
@@ -57,7 +57,7 @@
                       <label for="password">Password</label>
                       <input type="password" class="form-control" placeholder="Password" id="password" name="password"  autocomplete="off">
 
-                        @error('email')
+                        @error('password')
                             <div class="text-danger text-sm">
                                 {{ $message }}
                             </div>
@@ -68,13 +68,8 @@
                         <input type="password" class="form-control" placeholder="confirmation password" id="password" name="password_confirmation"  autocomplete="off">
                    </div>
 
-                  <div class="d-flex mb-3 align-items-center">
-                      <label class="control control--checkbox mb-0 d-inline">
-                          <span class="caption mb-2">Remember me</span>
-                        <p class="text-sm">punya akun ? <a href="{{ route('auth.login') }}">Login</a> </p>
-                      <input name="remember" id="remember" type="checkbox" checked="checked"/>
-                      <div class="control__indicator"></div>
-                      </label>
+                  <div class="d-flex align-items-center">
+                        <p class="text-sm mb-4">punya akun ? <a href="{{ route('auth.login') }}">Login</a> </p>
                   </div>
 
                   <button type="submit" class="btn btn-block btn-primary">Register</button>

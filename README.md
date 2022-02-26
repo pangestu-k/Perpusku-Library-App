@@ -6,7 +6,7 @@
 Hai teman-teman, <b>Perpusku</b> adalah sebuah aplikasi perpustakaan yang dibangun dengan menggunakan framework Laravel, yang akan mempermudah baik petugas maupun user dalam bertransaksi/ pinjam meminjam buku di perpustakaan, dilengkapi dengan multiple role sederhana dengan petugas dan member, dalam hal ini petugas dapat menambah buku, mengelola member yg meminjam, menkofirmasi peminjaman, memberikan denda, melakukan pembayaran denda, edit profile, dll. Sedangkan user dapat meminjam buku, melihat riwayat buku yang telah dia pinjam serta melihat tanggal pengembalian buku, dan juga update profile, selain itu aplikasi ini juga telah dilengkap dengan berbagai validasi data yang cukup lengkap. Projek ini juga masih bisa di kembangkan kembali sesuai dengan keinginan. Syarat untuk clone projek ini simple, kalian cukup like dan follow akun github saya di https://github.com/pangestu-k , ya follow itu gratis gk si.. (¬‿¬)
 
 
-<h3>Tata Cara Install 🌱</h3>
+<h3>Tata Cara Install 🌱</h3> 
 
 - composer install
 - cp .env.example .env

@@ -12,8 +12,8 @@ Hai teman-teman, <b>Perpusku</b> adalah sebuah aplikasi perpustakaan yang dibang
 - cp .env.example .env
 - php artisan key:generate
 - php artisan storage:link 
-- Buat Table di mysql atau postgree (postgree ada konfigurasi sendiri)
-- Tulis nama table di file .env
+- Buat Database di mysql atau postgree (postgree ada konfigurasi sendiri)
+- Tulis nama Database di file .env
 - php artisan migrate
 - php artisan db:seed
 

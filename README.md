@@ -9,7 +9,7 @@ Hai teman-teman, <b>Perpusku</b> adalah sebuah aplikasi perpustakaan yang dibang
 <h3>Tata Cara Install 🌱</h3> 
 
 - composer install
-- cp .env.example .env
+- copy file .env.example lalu ubah menjadi .env
 - php artisan key:generate
 - php artisan storage:link 
 - Buat Database di mysql atau postgree (postgree ada konfigurasi sendiri)

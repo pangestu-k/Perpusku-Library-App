@@ -90,7 +90,7 @@ class BorrowController extends Controller
         $dendaBuku = Borrow::find($id);
         $dendaBuku->update(['keterangan' => 'cepat kembalikan buku !!!, anda diberi denda']);
         $dendaBuku->user->update([
-            'denda' => $dendaBuku->user->denda + 3000,
+            'denda' => $dendaBuku->user->denda + 500,
         ]);
         session()->flash('success', 'Pemberian denda berhasil');
         return back();

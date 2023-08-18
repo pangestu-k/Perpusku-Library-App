@@ -19,7 +19,7 @@ class CreateBorrowsTable extends Migration
             $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali');
-            $table->enum('status', ['pinjam', 'kembali']);
+            $table->string('status');
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
